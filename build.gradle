@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.41'
-        springBootVersion = '2.0.1.RELEASE'
+        kotlinVersion = '1.2.50'
+        springBootVersion = '2.0.3.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -47,7 +47,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE')
+    compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE')
 //    compile('org.springframework.security:spring-security-oauth2-jose')
 //    compile('org.springframework.security:spring-security-oauth2-client')
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')

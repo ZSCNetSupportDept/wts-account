@@ -1,20 +1,41 @@
 package love.sola.zscnsd.wts.account.domain
 
-import love.sola.zscnsd.wts.account.domain.enums.Block
 import org.codehaus.jackson.annotate.JsonIgnore
-import java.time.DayOfWeek
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.FetchType
 
 @Entity
-data class Operator(
-    @Id val id: Int,
-    val name: String,
-    var access: Int,
-    var wechat: String?,
-    var block: Block?,
-    var week: DayOfWeek?,
-    @JsonIgnore var password: String?
-) {
+class Operator(
+    val stuffId: Int,
+    private var password: String?,
+    var arrangement: DutyArrangement?,
+    @ElementCollection(fetch = FetchType.EAGER)
+    var permissions: List<String>,
+    id: Long,
+    username: String,
+    wechat: String?,
+    phone: String?,
+    address: Address?,
+    account: IspAccount?
+) : User(id, username, wechat, phone, address, account) {
+
+    companion object {
+        private val ROLE_OPERATOR = SimpleGrantedAuthority("ROLE_OPERATOR")
+    }
+
+    override fun getAuthorities(): Collection<GrantedAuthority> {
+        //TODO cache this result if needed.
+        return super.getAuthorities() + ROLE_OPERATOR + permissions.map { SimpleGrantedAuthority(it) }
+    }
+
+    @JsonIgnore
+    override fun getPassword() = password
+
+    fun setPassword(password: String) {
+        this.password = password
+    }
 
 }

@@ -3,14 +3,14 @@ package love.sola.zscnsd.wts.account.api
 class APIResponse {
 
     companion object {
-        val EMPTY = APIResponse(Any())
+        val EMPTY = APIResponse()
     }
 
     val data: Any?
     val error: APIError?
     val meta: Any?
 
-    constructor(data: Any, meta: Any? = null) {
+    constructor(data: Any? = null, meta: Any? = null) {
         this.data = data
         this.error = null
         this.meta = meta
@@ -24,7 +24,12 @@ class APIResponse {
 
 }
 
-class APIError(val code: Int, val title: String, val detail: String? = title, val meta: Any? = null) {
+class APIError(
+    val code: Int,
+    val title: String,
+    val detail: String? = title,
+    val meta: Any? = null
+) {
     companion object {
         val ILLEGAL_USER_INPUT = APIError(40001, "illegal user input")
     }

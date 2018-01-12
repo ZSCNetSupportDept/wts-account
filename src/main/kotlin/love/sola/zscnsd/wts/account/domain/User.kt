@@ -13,7 +13,7 @@ import javax.persistence.InheritanceType
 @Inheritance(strategy = InheritanceType.JOINED)
 open class User(
     @Id val id: Long,
-    private val username: String,
+    val name: String,
     @JsonIgnore var wechat: String?,
     var phone: String?,
     var address: Address?,
@@ -28,7 +28,7 @@ open class User(
 
     override fun isEnabled() = true
 
-    override fun getUsername() = username
+    override fun getUsername() = id.toString() //We use id as identity
 
     override fun isCredentialsNonExpired(): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

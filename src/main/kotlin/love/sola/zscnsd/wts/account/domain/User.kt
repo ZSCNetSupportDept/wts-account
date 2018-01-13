@@ -30,9 +30,7 @@ open class User(
 
     override fun getUsername() = id.toString() //We use id as identity
 
-    override fun isCredentialsNonExpired(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun isCredentialsNonExpired() = true
 
     override fun getPassword(): String? = null
 

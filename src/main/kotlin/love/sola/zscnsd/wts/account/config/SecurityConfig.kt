@@ -6,14 +6,14 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.User
 
 @Configuration
-class SecurityConfig : WebSecurityConfigurerAdapter() {
+class SecurityConfig(val jpaUserDetailService: JpaUserDetailService) :
+    WebSecurityConfigurerAdapter() {
 
     @Bean
-    override fun authenticationManagerBean(): AuthenticationManager = super.authenticationManagerBean()
+    override fun authenticationManagerBean(): AuthenticationManager =
+        super.authenticationManagerBean()
 
     override fun configure(http: HttpSecurity) {
         http
@@ -22,8 +22,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
             .and()
             .csrf()
             .disable()
-            .userDetailsService {
-                User(it,"{noop}test", listOf(SimpleGrantedAuthority("ROLE_USER")))
-            }
+            .userDetailsService(jpaUserDetailService)
     }
 }

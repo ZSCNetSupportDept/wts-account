@@ -14,7 +14,6 @@ import javax.persistence.InheritanceType
 open class User(
     @Id val id: Long,
     val name: String,
-    @JsonIgnore var wechat: String?,
     var phone: String?,
     var address: Address?,
     var account: IspAccount?

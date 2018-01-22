@@ -18,7 +18,6 @@ class RegisterController(val userRepository: UserRepository) {
     fun wechat(
         @RequestParam userId: Long,
         @RequestParam username: String,
-        @RequestParam wechat: String,
         @RequestParam phone: String,
         @RequestParam block: Block,
         @RequestParam room: String,
@@ -30,7 +29,6 @@ class RegisterController(val userRepository: UserRepository) {
         if (user.username != username) {
             return APIResponse(APIError.ILLEGAL_USER_INPUT.withDetail("username doesn't match"))
         }
-        user.wechat = wechat
         user.phone = phone
         user.address = Address(block, room)
         user.account = IspAccount(isp, ispAccount)

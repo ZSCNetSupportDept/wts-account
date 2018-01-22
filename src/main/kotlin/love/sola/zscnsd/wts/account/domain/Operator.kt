@@ -16,11 +16,10 @@ class Operator(
     var permissions: List<String>,
     id: Long,
     username: String,
-    wechat: String?,
     phone: String?,
     address: Address?,
     account: IspAccount?
-) : User(id, username, wechat, phone, address, account) {
+) : User(id, username, phone, address, account) {
 
     companion object {
         private val ROLE_OPERATOR = SimpleGrantedAuthority("ROLE_OPERATOR")

@@ -35,7 +35,6 @@ class OAuth2ServerTest {
             "Sola",
             null,
             null,
-            null,
             null
         )
         userRepository.save(mockOperator)

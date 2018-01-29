@@ -24,4 +24,5 @@ class SecurityConfig(val jpaUserDetailService: JpaUserDetailService) :
             .disable()
             .userDetailsService(jpaUserDetailService)
     }
+
 }

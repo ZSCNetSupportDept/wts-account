@@ -2,9 +2,11 @@ package love.sola.zscnsd.wts.account.api
 
 import love.sola.zscnsd.wts.account.domain.Address
 import love.sola.zscnsd.wts.account.domain.IspAccount
+import love.sola.zscnsd.wts.account.domain.User
 import love.sola.zscnsd.wts.account.domain.UserRepository
 import love.sola.zscnsd.wts.account.domain.enums.Block
 import love.sola.zscnsd.wts.account.domain.enums.ISP
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("register")
-class RegisterController(val userRepository: UserRepository) {
+class RegisterController(private val userRepository: UserRepository) {
 
     @PostMapping("wechat")
     fun wechat(

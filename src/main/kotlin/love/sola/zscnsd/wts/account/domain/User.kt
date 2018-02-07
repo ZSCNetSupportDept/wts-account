@@ -1,5 +1,6 @@
 package love.sola.zscnsd.wts.account.domain
 
+import org.codehaus.jackson.annotate.JsonIgnore
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -13,6 +14,7 @@ import javax.persistence.InheritanceType
 open class User(
     @Id val id: Long,
     val name: String,
+    private var password: String?,
     var phone: String?,
     var address: Address?,
     var account: IspAccount?
@@ -22,15 +24,20 @@ open class User(
         private val ROLE_USER = SimpleGrantedAuthority("ROLE_USER")
     }
 
+    override fun getUsername() = id.toString() //We use id as identity
+
+    @JsonIgnore
+    override fun getPassword() = password
+
+    fun setPassword(password: String) {
+        this.password = password
+    }
+
     override fun getAuthorities(): Collection<GrantedAuthority> = listOf(ROLE_USER)
 
     override fun isEnabled() = true
 
-    override fun getUsername() = id.toString() //We use id as identity
-
     override fun isCredentialsNonExpired() = true
-
-    override fun getPassword(): String? = null
 
     override fun isAccountNonExpired() = true
 

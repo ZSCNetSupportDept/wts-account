@@ -20,10 +20,10 @@ class UserRepositoryTest {
         val mockOperator = Operator(
             1501,
             null,
-            null,
             emptyList(),
             2015001010101,
             "Sola",
+            null,
             null,
             null,
             null

@@ -28,11 +28,11 @@ class OAuth2ServerTest {
     fun `generic OAuth2 client should login correctly`() {
         val mockOperator = Operator(
             1501,
-            "{noop}test",
             DutyArrangement(DayOfWeek.MONDAY, Block.XH_A),
             emptyList(),
             2015000000001,
             "Sola",
+            "{noop}test",
             null,
             null,
             null
@@ -47,7 +47,6 @@ class OAuth2ServerTest {
             .body
         println("response = $response")
         Assert.assertNotNull(response)
-
     }
 
 }

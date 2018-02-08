@@ -5,11 +5,13 @@ import love.sola.zscnsd.wts.account.domain.Operator
 import love.sola.zscnsd.wts.account.domain.UserRepository
 import love.sola.zscnsd.wts.account.domain.enums.Block
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.boot.test.web.client.postForEntity
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.util.LinkedMultiValueMap
@@ -44,6 +46,16 @@ class OAuth2ServerTest {
                 put("username", listOf("2015000000001"))
                 put("password", listOf("test"))
             })
+            .body
+        println("response = $response")
+        Assert.assertNotNull(response)
+    }
+
+    @Test
+    @Ignore("We are not using RSA key yet.") //FIXME
+    fun `endpoint token_key should work correctly`() {
+        val response = restTemplate.withBasicAuth("generic", "mypass")
+            .getForEntity<String>("/oauth/token_key")
             .body
         println("response = $response")
         Assert.assertNotNull(response)

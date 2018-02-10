@@ -1,5 +1,6 @@
 package love.sola.zscnsd.wts.account.domain
 
+import love.sola.zscnsd.wts.account.mock.UNREGISTERED_OPERATOR
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,19 +18,8 @@ class UserRepositoryTest {
 
     @Test
     fun `UserRepository should be able to load Operators`() {
-        val mockOperator = Operator(
-            1501,
-            null,
-            emptyList(),
-            2015001010101,
-            "Sola",
-            null,
-            null,
-            null,
-            null
-        )
-        userRepository.save(mockOperator)
-        val loadedUser = userRepository.findById(2015001010101).get()
+        userRepository.save(UNREGISTERED_OPERATOR)
+        val loadedUser = userRepository.findById(UNREGISTERED_OPERATOR.id).get()
         Assert.assertTrue(loadedUser is Operator)
     }
 

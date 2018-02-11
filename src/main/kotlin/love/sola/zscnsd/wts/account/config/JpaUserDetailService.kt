@@ -4,10 +4,8 @@ import love.sola.zscnsd.wts.account.domain.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.stereotype.Service
 
-@Service
-class JpaUserDetailService(val userRepository: UserRepository) : UserDetailsService {
+class JpaUserDetailService(private val userRepository: UserRepository) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails {
         try {

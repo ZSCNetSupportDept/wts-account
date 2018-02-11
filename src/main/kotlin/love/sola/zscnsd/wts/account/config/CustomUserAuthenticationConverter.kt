@@ -4,9 +4,7 @@ import love.sola.zscnsd.wts.account.domain.Operator
 import love.sola.zscnsd.wts.account.domain.User
 import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter
-import org.springframework.stereotype.Component
 
-@Component
 class CustomUserAuthenticationConverter : UserAuthenticationConverter {
 
     override fun extractAuthentication(map: Map<String, *>): Authentication? {

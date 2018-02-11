@@ -1,28 +1,38 @@
 package love.sola.zscnsd.wts.account.config
 
+import love.sola.zscnsd.wts.account.config.oauth2.WechatTokenGranter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
+import org.springframework.security.oauth2.provider.CompositeTokenGranter
+import org.springframework.security.oauth2.provider.TokenGranter
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenGranter
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter
+import org.springframework.security.oauth2.provider.implicit.ImplicitTokenGranter
+import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter
+import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
+import java.util.*
 
 @Configuration
 @EnableAuthorizationServer
 class OAuth2ServerConfig(
-    val authenticationManager: AuthenticationManager,
-    val customUserAuthenticationConverter: CustomUserAuthenticationConverter
+    private val authenticationManager: AuthenticationManager,
+    private val userDetailService: UserDetailsService
 ) : AuthorizationServerConfigurerAdapter() {
 
     @Bean
     fun accessTokenConverter() = JwtAccessTokenConverter().apply {
         setSigningKey("secret") //FIXME more advance configure
         accessTokenConverter = DefaultAccessTokenConverter().apply {
-            setUserTokenConverter(customUserAuthenticationConverter)
+            setUserTokenConverter(CustomUserAuthenticationConverter())
             setIncludeGrantType(true)
         }
     }

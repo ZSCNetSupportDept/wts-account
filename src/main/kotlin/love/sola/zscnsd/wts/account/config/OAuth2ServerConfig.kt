@@ -50,7 +50,7 @@ class OAuth2ServerConfig(
         clients.inMemory()
             .withClient("wechat")
             .secret("{noop}mypass")  //FIXME more advance configure
-            .authorizedGrantTypes("client_credentials")
+            .authorizedGrantTypes("wechat")
             .scopes("user_info")
             .resourceIds("account", "ticket")
             .and()
@@ -65,5 +65,47 @@ class OAuth2ServerConfig(
         endpoints.tokenStore(tokenStore())
             .accessTokenConverter(accessTokenConverter())
             .authenticationManager(authenticationManager)
+            .reconfigureTokenGranter()
+    }
+
+    private fun AuthorizationServerEndpointsConfigurer.reconfigureTokenGranter(): AuthorizationServerEndpointsConfigurer {
+        val clientDetails = clientDetailsService
+        val tokenServices = tokenServices
+        val authorizationCodeServices = authorizationCodeServices
+        val requestFactory = oAuth2RequestFactory
+
+        val tokenGranters = ArrayList<TokenGranter>()
+        tokenGranters.add(
+            AuthorizationCodeTokenGranter(
+                tokenServices, authorizationCodeServices, clientDetails,
+                requestFactory
+            )
+        )
+        tokenGranters.add(RefreshTokenGranter(tokenServices, clientDetails, requestFactory))
+        tokenGranters.add(ImplicitTokenGranter(tokenServices, clientDetails, requestFactory))
+        tokenGranters.add(
+            ClientCredentialsTokenGranter(
+                tokenServices,
+                clientDetails,
+                requestFactory
+            )
+        )
+        tokenGranters.add(
+            ResourceOwnerPasswordTokenGranter(
+                authenticationManager, tokenServices,
+                clientDetails, requestFactory
+            )
+        )
+        tokenGranters.add(
+            WechatTokenGranter(
+                userDetailService,
+                tokenServices,
+                clientDetails,
+                requestFactory
+            )
+        )
+        val tokenGranter = CompositeTokenGranter(tokenGranters)
+        tokenGranter(tokenGranter)
+        return this
     }
 }

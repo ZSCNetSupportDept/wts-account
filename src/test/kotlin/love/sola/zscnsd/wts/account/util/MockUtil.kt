@@ -1,4 +1,4 @@
-package love.sola.zscnsd.wts.account.mock
+package love.sola.zscnsd.wts.account.util
 
 import love.sola.zscnsd.wts.account.domain.*
 import love.sola.zscnsd.wts.account.domain.enums.Block

@@ -1,6 +1,6 @@
 package love.sola.zscnsd.wts.account.domain
 
-import love.sola.zscnsd.wts.account.mock.UNREGISTERED_OPERATOR
+import love.sola.zscnsd.wts.account.util.UNREGISTERED_OPERATOR
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

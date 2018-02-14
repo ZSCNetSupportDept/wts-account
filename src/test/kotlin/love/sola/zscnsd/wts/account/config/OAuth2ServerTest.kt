@@ -38,6 +38,19 @@ class OAuth2ServerTest {
     }
 
     @Test
+    fun `wechat OAuth2 client should login correctly`() {
+        userRepository.save(REGISTERED_OPERATOR)
+        val response = restTemplate.withBasicAuth("wechat", "mypass")
+            .postForEntity<String>("/oauth/token", LinkedMultiValueMap<String, String>().apply {
+                put("grant_type", listOf("wechat"))
+                put("username", listOf(REGISTERED_OPERATOR.id.toString()))
+            })
+            .body
+        println("response = $response")
+        Assert.assertNotNull(response)
+    }
+
+    @Test
     @Ignore("We are not using RSA key yet.") //FIXME
     fun `endpoint token_key should work correctly`() {
         val response = restTemplate.withBasicAuth("generic", "mypass")

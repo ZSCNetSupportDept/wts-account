@@ -12,8 +12,11 @@ enum class OAuth2Clients(val id: String, val secret: String, val grantType: Stri
 }
 
 fun TestRestTemplate.getAccessToken(client: OAuth2Clients, user: User): OAuth2AccessToken? =
-    postForEntity<OAuth2AccessToken>("/oauth/token", LinkedMultiValueMap<String, String>().apply {
-        set("grant_type", client.grantType)
-        set("username", user.id.toString())
-        set("password", user.password)
-    }).body
+    withBasicAuth(client.id, client.secret)
+        .postForEntity<OAuth2AccessToken>(
+            "/oauth/token",
+            LinkedMultiValueMap<String, String>().apply {
+                set("grant_type", client.grantType)
+                set("username", user.id.toString())
+                set("password", user.password)
+            }).body

@@ -18,5 +18,5 @@ fun TestRestTemplate.getAccessToken(client: OAuth2Clients, user: User): OAuth2Ac
             LinkedMultiValueMap<String, String>().apply {
                 set("grant_type", client.grantType)
                 set("username", user.id.toString())
-                set("password", user.password)
+                set("password", user.password?.substring("{noop}".length))
             }).body

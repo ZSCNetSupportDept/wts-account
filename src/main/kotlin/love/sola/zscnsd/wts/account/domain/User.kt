@@ -1,6 +1,6 @@
 package love.sola.zscnsd.wts.account.domain
 
-import org.codehaus.jackson.annotate.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -11,6 +11,15 @@ import javax.persistence.InheritanceType
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties(
+    "username",
+    "password",
+    "authorities",
+    "enabled",
+    "accountNonLocked",
+    "accountNonExpired",
+    "credentialsNonExpired"
+)
 open class User(
     @Id val id: Long,
     val name: String,
@@ -26,7 +35,6 @@ open class User(
 
     override fun getUsername() = id.toString() //We use id as identity
 
-    @JsonIgnore
     override fun getPassword() = password
 
     fun setPassword(password: String) {

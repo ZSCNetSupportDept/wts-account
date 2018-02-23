@@ -13,21 +13,23 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("register")
+@RequestMapping("profile")
 class RegisterController(private val userRepository: UserRepository) {
 
-    @PostMapping("wechat")
-    fun wechat(
+    @PostMapping("update")
+    fun update(
         @RequestParam userId: Long,
         @RequestParam username: String,
         @RequestParam phone: String,
         @RequestParam block: Block,
         @RequestParam room: String,
         @RequestParam isp: ISP,
-        @RequestParam ispAccount: String
+        @RequestParam ispAccount: String,
+        @AuthenticationPrincipal user: User?
     ): APIResponse {
-        val user = userRepository.findById(userId).orElse(null)
-                ?: return APIResponse(APIError.ILLEGAL_USER_INPUT.withDetail("user's id not found"))
+        if (user == null) {
+            return APIResponse(APIError.PERMISSION_DENIED)
+        }
         if (user.username != username) {
             return APIResponse(APIError.ILLEGAL_USER_INPUT.withDetail("username doesn't match"))
         }

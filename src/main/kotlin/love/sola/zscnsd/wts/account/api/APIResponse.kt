@@ -32,6 +32,7 @@ class APIError(
 ) {
     companion object {
         val ILLEGAL_USER_INPUT = APIError(40001, "illegal user input")
+        val PERMISSION_DENIED = APIError(40001, "permission denied")
     }
 
     fun withDetail(detail: String) = APIError(code, title, detail, meta)

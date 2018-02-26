@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("profile")
-class RegisterController(private val userRepository: UserRepository) {
+class ProfileController(private val userRepository: UserRepository) {
 
     @PostMapping("update")
     fun update(

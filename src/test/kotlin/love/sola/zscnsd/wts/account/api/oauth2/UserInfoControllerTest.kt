@@ -12,7 +12,9 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.boot.test.web.client.getForObject
+import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
@@ -31,6 +33,13 @@ class UserInfoControllerTest {
         val user = restTemplate.getForObject<User>("/oauth2/user?access_token={token}", token.value)
         println(user)
         Assert.assertNotNull(user)
+    }
+
+    @Test
+    fun `request without authentication should return 401`() {
+        val response = restTemplate.getForEntity<String>("/oauth2/user")
+        Assert.assertNotNull(response)
+        Assert.assertEquals(response.statusCode, HttpStatus.UNAUTHORIZED)
     }
 
 }

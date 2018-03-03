@@ -1,6 +1,5 @@
-package love.sola.zscnsd.wts.account.config
+package love.sola.zscnsd.wts.account.config.oauth2
 
-import love.sola.zscnsd.wts.account.config.oauth2.WechatTokenGranter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -23,7 +22,7 @@ import java.util.*
 
 @Configuration
 @EnableAuthorizationServer
-class OAuth2ServerConfig(
+class AuthorizationServerConfig(
     private val authenticationManager: AuthenticationManager,
     private val userDetailService: UserDetailsService
 ) : AuthorizationServerConfigurerAdapter() {

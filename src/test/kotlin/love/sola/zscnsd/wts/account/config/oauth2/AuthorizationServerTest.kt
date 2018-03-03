@@ -1,4 +1,4 @@
-package love.sola.zscnsd.wts.account.config
+package love.sola.zscnsd.wts.account.config.oauth2
 
 import love.sola.zscnsd.wts.account.domain.UserRepository
 import love.sola.zscnsd.wts.account.util.OAuth2Clients
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class OAuth2ServerTest {
+class AuthorizationServerTest {
 
     @Autowired
     lateinit var userRepository: UserRepository

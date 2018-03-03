@@ -1,4 +1,4 @@
-package love.sola.zscnsd.wts.account.config
+package love.sola.zscnsd.wts.account.config.oauth2
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore
 
 @Configuration
 @EnableResourceServer
-class OAuth2ClientConfig(val tokenStore: TokenStore) : ResourceServerConfigurerAdapter() {
+class ResourceServerConfig(val tokenStore: TokenStore) : ResourceServerConfigurerAdapter() {
 
     @Bean
     fun tokenServices() = DefaultTokenServices().apply {

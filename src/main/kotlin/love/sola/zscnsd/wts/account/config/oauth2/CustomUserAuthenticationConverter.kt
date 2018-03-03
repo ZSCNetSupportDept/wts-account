@@ -1,4 +1,4 @@
-package love.sola.zscnsd.wts.account.config
+package love.sola.zscnsd.wts.account.config.oauth2
 
 import com.fasterxml.jackson.module.kotlin.convertValue
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

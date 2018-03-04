@@ -1,30 +1,18 @@
 package love.sola.zscnsd.wts.account.api
 
-class APIResponse {
+data class APIResponse(val data: Any?, val error: APIError?, val meta: Any?) {
 
     companion object {
         val EMPTY = APIResponse()
     }
 
-    val data: Any?
-    val error: APIError?
-    val meta: Any?
+    constructor(data: Any? = null, meta: Any? = null) : this(data, null, meta)
 
-    constructor(data: Any? = null, meta: Any? = null) {
-        this.data = data
-        this.error = null
-        this.meta = meta
-    }
-
-    constructor(error: APIError, meta: Any? = null) {
-        this.data = null
-        this.error = error
-        this.meta = meta
-    }
+    constructor(error: APIError, meta: Any? = null) : this(null, error, meta)
 
 }
 
-class APIError(
+data class APIError(
     val code: Int,
     val title: String,
     val detail: String? = title,

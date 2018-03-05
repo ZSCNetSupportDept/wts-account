@@ -18,8 +18,6 @@ class ProfileController(private val userRepository: UserRepository) {
 
     @PostMapping("update")
     fun update(
-        @RequestParam userId: Long,
-        @RequestParam username: String,
         @RequestParam phone: String,
         @RequestParam block: Block,
         @RequestParam room: String,
@@ -29,9 +27,6 @@ class ProfileController(private val userRepository: UserRepository) {
     ): APIResponse {
         if (user == null) {
             return APIResponse(APIError.PERMISSION_DENIED)
-        }
-        if (user.username != username) {
-            return APIResponse(APIError.ILLEGAL_USER_INPUT.withDetail("username doesn't match"))
         }
         user.phone = phone
         user.address = Address(block, room)

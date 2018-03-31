@@ -8,7 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter
 
-class CustomUserAuthenticationConverter : UserAuthenticationConverter {
+class WtsUserAuthenticationConverter : UserAuthenticationConverter {
 
     private val objectMapper = jacksonObjectMapper().findAndRegisterModules()
 

@@ -1,5 +1,6 @@
 package love.sola.zscnsd.wts.account.config.oauth2
 
+import love.sola.zscnsd.wts.account.config.oauth2.WtsUserAuthenticationConverter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -31,7 +32,7 @@ class AuthorizationServerConfig(
     fun accessTokenConverter() = JwtAccessTokenConverter().apply {
         setSigningKey("secret") //FIXME more advance configure
         accessTokenConverter = DefaultAccessTokenConverter().apply {
-            setUserTokenConverter(CustomUserAuthenticationConverter())
+            setUserTokenConverter(WtsUserAuthenticationConverter())
             setIncludeGrantType(true)
         }
     }

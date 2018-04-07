@@ -39,8 +39,8 @@ compileTestKotlin {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
-
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')

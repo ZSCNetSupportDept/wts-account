@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.getForEntity
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
@@ -24,6 +25,7 @@ class AuthorizationServerTest {
     lateinit var restTemplate: TestRestTemplate
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     fun `generic OAuth2 client should login correctly`() {
         userRepository.save(REGISTERED_OPERATOR)
         val token = restTemplate.getAccessToken(OAuth2Clients.GENERIC, REGISTERED_OPERATOR)
@@ -32,6 +34,7 @@ class AuthorizationServerTest {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     fun `wechat OAuth2 client should login correctly`() {
         userRepository.save(REGISTERED_OPERATOR)
         val token = restTemplate.getAccessToken(OAuth2Clients.WECHAT, REGISTERED_OPERATOR)!!

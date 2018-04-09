@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.postForObject
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.util.LinkedMultiValueMap
 
@@ -27,6 +28,7 @@ class ProfileControllerTest {
     lateinit var restTemplate: TestRestTemplate
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     fun `update should work properly`() {
         userRepository.save(REGISTERED_USER)
         val token = restTemplate.getAccessToken(OAuth2Clients.WECHAT, REGISTERED_USER)!!

@@ -15,6 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.boot.test.web.client.getForObject
 import org.springframework.http.HttpStatus
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
@@ -27,6 +28,7 @@ class UserInfoControllerTest {
     lateinit var restTemplate: TestRestTemplate
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     fun `user info should return user's info`() {
         userRepository.save(REGISTERED_USER)
         val token = restTemplate.getAccessToken(OAuth2Clients.WECHAT, REGISTERED_USER)!!

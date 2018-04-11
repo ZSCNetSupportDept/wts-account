@@ -39,7 +39,6 @@ compileTestKotlin {
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
 dependencies {

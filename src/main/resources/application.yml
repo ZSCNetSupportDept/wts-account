@@ -1,4 +1,10 @@
+server:
+  port: 8801
 spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/wts?useSSL=false
+    username: root
   jpa:
     generate-ddl: true
     hibernate:

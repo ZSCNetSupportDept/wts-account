@@ -2,9 +2,12 @@ package love.sola.zscnsd.wts.account.domain
 
 import love.sola.zscnsd.wts.account.domain.enums.Block
 import java.time.DayOfWeek
+import javax.persistence.Entity
+import javax.persistence.Id
 
+@Entity
 data class Operator(
-    val id: Int,
+    @Id val id: Int,
     val name: String,
     var access: Int,
     var wechat: String?,

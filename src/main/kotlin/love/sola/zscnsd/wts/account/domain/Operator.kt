@@ -11,9 +11,9 @@ data class Operator(
     val name: String,
     var access: Int,
     var wechat: String?,
-    var block: Block,
-    var week: DayOfWeek,
-    var password: String
+    var block: Block?,
+    var week: DayOfWeek?,
+    var password: String?
 ) {
 
 }

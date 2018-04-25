@@ -8,13 +8,13 @@ import javax.persistence.Id
 @Entity
 data class User(
     @Id val id: Long,
-    var wechat: String,
+    var wechat: String?,
     val name: String,
-    var phone: String,
-    var block: Block,
-    var room: String,
-    var isp: ISP,
-    var netAccount: String
+    var phone: String?,
+    var block: Block?,
+    var room: String?,
+    var isp: ISP?,
+    var netAccount: String?
 ){
 
 }

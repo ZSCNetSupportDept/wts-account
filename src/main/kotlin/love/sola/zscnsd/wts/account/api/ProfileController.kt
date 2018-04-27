@@ -1,11 +1,11 @@
 package love.sola.zscnsd.wts.account.api
 
-import love.sola.zscnsd.wts.account.domain.Address
-import love.sola.zscnsd.wts.account.domain.IspAccount
 import love.sola.zscnsd.wts.account.domain.User
 import love.sola.zscnsd.wts.account.domain.UserRepository
-import love.sola.zscnsd.wts.account.domain.enums.Block
-import love.sola.zscnsd.wts.account.domain.enums.ISP
+import love.sola.zscnsd.wts.common.domain.Address
+import love.sola.zscnsd.wts.common.domain.Block
+import love.sola.zscnsd.wts.common.domain.ISP
+import love.sola.zscnsd.wts.common.domain.IspAccount
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping

@@ -1,11 +1,11 @@
 package love.sola.zscnsd.wts.account.api
 
 import love.sola.zscnsd.wts.account.domain.UserRepository
-import love.sola.zscnsd.wts.account.domain.enums.Block
-import love.sola.zscnsd.wts.account.domain.enums.ISP
 import love.sola.zscnsd.wts.account.util.OAuth2Clients
 import love.sola.zscnsd.wts.account.util.REGISTERED_USER
 import love.sola.zscnsd.wts.account.util.getAccessToken
+import love.sola.zscnsd.wts.common.domain.Block
+import love.sola.zscnsd.wts.common.domain.ISP
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test

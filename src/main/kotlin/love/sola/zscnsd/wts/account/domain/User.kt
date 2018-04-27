@@ -1,13 +1,12 @@
 package love.sola.zscnsd.wts.account.domain
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import love.sola.zscnsd.wts.common.domain.Address
+import love.sola.zscnsd.wts.common.domain.IspAccount
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Inheritance
-import javax.persistence.InheritanceType
+import javax.persistence.*
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -25,8 +24,8 @@ open class User(
     val name: String,
     private var password: String?,
     var phone: String?,
-    var address: Address?,
-    var account: IspAccount?
+    @Embedded var address: Address?,
+    @Embedded var account: IspAccount?
 ) : UserDetails {
 
     companion object {

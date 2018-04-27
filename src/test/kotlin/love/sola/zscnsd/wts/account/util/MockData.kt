@@ -1,8 +1,9 @@
 package love.sola.zscnsd.wts.account.util
 
 import love.sola.zscnsd.wts.account.domain.*
-import love.sola.zscnsd.wts.account.domain.enums.Block
-import love.sola.zscnsd.wts.account.domain.enums.ISP
+import love.sola.zscnsd.wts.account.domain.Operator
+import love.sola.zscnsd.wts.account.domain.User
+import love.sola.zscnsd.wts.common.domain.*
 import java.time.DayOfWeek
 
 internal val UNREGISTERED_USER = User(

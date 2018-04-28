@@ -25,7 +25,7 @@ class OAuth2ServerConfig(val authenticationManager: AuthenticationManager) : Aut
     override fun configure(clients: ClientDetailsServiceConfigurer) {
         clients.inMemory()
             .withClient("test")
-            .secret("{noop}pass:p")
+            .secret("{noop}pass")  //FIXME more advance configure
             .authorizedGrantTypes("password")
             .scopes("user_info")
             .resourceIds("account", "ticket")

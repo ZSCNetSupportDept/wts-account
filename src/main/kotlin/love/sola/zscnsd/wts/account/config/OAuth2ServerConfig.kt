@@ -24,8 +24,14 @@ class OAuth2ServerConfig(val authenticationManager: AuthenticationManager) : Aut
 
     override fun configure(clients: ClientDetailsServiceConfigurer) {
         clients.inMemory()
-            .withClient("test")
-            .secret("{noop}pass")  //FIXME more advance configure
+            .withClient("wechat")
+            .secret("{noop}mypass")  //FIXME more advance configure
+            .authorizedGrantTypes("client_credentials")
+            .scopes("user_info")
+            .resourceIds("account", "ticket")
+            .and()
+            .withClient("generic")
+            .secret("{noop}mypass")  //FIXME more advance configure
             .authorizedGrantTypes("password")
             .scopes("user_info")
             .resourceIds("account", "ticket")

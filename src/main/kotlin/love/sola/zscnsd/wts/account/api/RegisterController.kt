@@ -22,10 +22,20 @@ class RegisterController(val userRepository: UserRepository) {
         @RequestParam room: String,
         @RequestParam isp: ISP,
         @RequestParam netAccount: String
-    ) {
+    ): APIResponse {
         val user = userRepository.findById(userId).orElse(null)
-        if (user.name != username) throw IllegalArgumentException("username doesn't match")
-        TODO()
+                ?: return APIResponse(APIError.ILLEGAL_USER_INPUT.withDetail("user's id not found"))
+        if (user.name != username) {
+            return APIResponse(APIError.ILLEGAL_USER_INPUT.withDetail("username doesn't match"))
+        }
+        user.wechat = wechat
+        user.phone = phone
+        user.block = block
+        user.room = room
+        user.isp = isp
+        user.netAccount = netAccount
+        val updatedUser = userRepository.save(user)
+        return APIResponse(updatedUser)
     }
 
 }

@@ -7,3 +7,4 @@ import org.springframework.stereotype.Repository
 interface UserRepository : JpaRepository<User, Long> {
     fun findByWechat(wechat: String): User?
 }
+

@@ -22,6 +22,12 @@ class OAuth2ServerConfig(val authenticationManager: AuthenticationManager) : Aut
     @Bean
     fun tokenStore() = JwtTokenStore(accessTokenConverter())
 
+    /*
+    Authorization server provides two client types
+    a wechat client uses client_credentials grant type means it's trusted client
+    a generic client uses password grant type so third party applications can hook into
+    learn more at https://alexbilbie.com/guide-to-oauth-2-grants/
+     */
     override fun configure(clients: ClientDetailsServiceConfigurer) {
         clients.inMemory()
             .withClient("wechat")

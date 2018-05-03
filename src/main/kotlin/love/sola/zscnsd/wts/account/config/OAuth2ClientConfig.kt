@@ -27,6 +27,6 @@ class OAuth2ClientConfig(val tokenStore: TokenStore) : ResourceServerConfigurerA
     override fun configure(http: HttpSecurity) {
         http
             .authorizeRequests()
-            .antMatchers().permitAll()
+            .anyRequest().authenticated()
     }
 }

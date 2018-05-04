@@ -1,4 +1,4 @@
-package love.sola.zscnsd.wts.account.api
+package love.sola.zscnsd.wts.account.api.rest
 
 import love.sola.zscnsd.wts.account.domain.User
 import love.sola.zscnsd.wts.account.domain.UserRepository
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("profile")
+@RequestMapping("api/rest/profile")
 class ProfileController(private val userRepository: UserRepository) {
 
     @PostMapping("update")
@@ -23,16 +23,12 @@ class ProfileController(private val userRepository: UserRepository) {
         @RequestParam room: String,
         @RequestParam isp: ISP,
         @RequestParam ispAccount: String,
-        @AuthenticationPrincipal user: User?
-    ): APIResponse {
-        if (user == null) {
-            return APIResponse(APIError.PERMISSION_DENIED)
-        }
+        @AuthenticationPrincipal user: User
+    ): User {
         user.phone = phone
         user.address = Address(block, room)
         user.account = IspAccount(isp, ispAccount)
-        val updatedUser = userRepository.save(user)
-        return APIResponse(updatedUser)
+        return userRepository.save(user)
     }
 
 }

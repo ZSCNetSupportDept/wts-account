@@ -1,5 +1,6 @@
 package love.sola.zscnsd.wts.account.api
 
+import love.sola.zscnsd.wts.account.domain.User
 import love.sola.zscnsd.wts.account.domain.UserRepository
 import love.sola.zscnsd.wts.account.util.OAuth2Clients
 import love.sola.zscnsd.wts.account.util.REGISTERED_USER
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.postForObject
+import org.springframework.http.client.SimpleClientHttpRequestFactory
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.util.LinkedMultiValueMap
@@ -32,8 +34,8 @@ class ProfileControllerTest {
     fun `update should work properly`() {
         userRepository.save(REGISTERED_USER)
         val token = restTemplate.getAccessToken(OAuth2Clients.WECHAT, REGISTERED_USER)!!
-        val response = restTemplate.postForObject<APIResponse>(
-            "/profile/update?access_token={token}",
+        val response = restTemplate.postForObject<User>(
+            "/api/rest/profile/update?access_token={token}",
             LinkedMultiValueMap<String, String>().apply {
                 this["phone"] = "16677778888"
                 this["block"] = "XH_B"

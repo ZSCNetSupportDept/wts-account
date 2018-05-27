@@ -2,6 +2,7 @@ package love.sola.zscnsd.wts.account.domain
 
 import love.sola.zscnsd.wts.account.domain.enums.Block
 import org.codehaus.jackson.annotate.JsonIgnore
+import org.hibernate.annotations.DynamicUpdate
 import java.time.DayOfWeek
 import javax.persistence.Entity
 import javax.persistence.Id

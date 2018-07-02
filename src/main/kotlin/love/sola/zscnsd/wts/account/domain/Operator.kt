@@ -7,14 +7,11 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Entity
-data class Operator(
-    @Id val id: Int,
-    val name: String,
+class Operator(
     var access: Int,
-    var wechat: String?,
     var block: Block?,
     var week: DayOfWeek?,
     @JsonIgnore var password: String?
-) {
+) : User {
 
 }
